@@ -3,6 +3,8 @@ const imageContEl = document.querySelector(".image-container");
 const imgsEl = document.querySelectorAll("img");
 const prevEl = document.querySelector(".prev");
 
+let timeOut;
+
 let currentImg = 1;
 
 const updateImg = function () {
@@ -13,7 +15,7 @@ const updateImg = function () {
   }
   imageContEl.style.transform = `translateX(-${(currentImg - 1) * 500}px)`;
 
-  setTimeout(() => {
+  timeOut = setTimeout(() => {
     currentImg++;
     updateImg();
   }, 3000);
@@ -21,11 +23,13 @@ const updateImg = function () {
 
 nextEl.addEventListener("click", () => {
   currentImg++;
+  clearTimeout(timeOut);
   updateImg();
 });
 
 prevEl.addEventListener("click", () => {
   currentImg--;
+  clearTimeout(timeOut);
   updateImg();
 });
 
